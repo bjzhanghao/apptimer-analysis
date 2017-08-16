@@ -1,3 +1,4 @@
 #Use limited resource
-spark2-shell --num-executors 4 --executor-memory 512M
+#FIXME: should disable dynamic allocation!
+spark2-shell --num-executors 4 --executor-cores 2 --executor-memory 1G
 

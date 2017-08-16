@@ -1,4 +1,28 @@
-val APP = "com.ss.android.article.news"
+//val APP = "com.ss.android.article.news"
+//val APP = "com.tencent.mobileqq"
+//val APP = "com.sina.weibo"
+//val APP = "com.tencent.mm"
+//val APP = "com.taobao.taobao"
+//val APP = "com.zhihu.android"
+//val APP = "com.eg.android.AlipayGphone"
+//val APP = "com.netease.cloudmusic"
+//val APP = "com.jingdong.app.mall"
+//val APP = "com.autonavi.minimap"
+//val APP = "com.baidu.BaiduMap"
+//val APP = "com.tmall.wireless"
+//val APP = "com.evergrande.eif.android.hengjiaosuo" //too few data
+//val APP = "com.bank9f.weilicai" //too few data
+//val APP = "com.ppdai.loan"  //too few data
+//val APP = "com.ucredit.financial.android" //人人贷
+//val APP = "so.ofo.labofo"
+//val APP = "com.mobike.mobikeapp"
+//val APP = "com.beastbike.bluegogo" //小蓝单车
+//val APP = "me.ele"
+//val APP = "com.baidu.lbs.waimai"
+//val APP = "com.sankuai.meituan.takeoutnew"
+//val APP = "com.tencent.map"
+//val APP = "com.suning.mobile.ebuy"
+val APP = "com.dangdang.buy2"
 
 //读取原始数据并做必要过滤
 val raw = spark.read.option("header","true").csv("hdfs://192.168.130.60/user/test/tmp/ap/a_2017")
