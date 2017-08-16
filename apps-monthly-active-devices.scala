@@ -1,7 +1,7 @@
 import org.apache.spark.sql.types._
 
 //每月活跃用户数最多的100个app
-val month = "201702"
+val month = "201706"
 val ignored = List(
 	"com.android.settings","com.miui.home","cn.apptimer.client","com.android.quicksearchbox",
 	"com.android.systemui","com.miui.antispam","com.android.systemui","com.android.packageinstaller",
@@ -16,7 +16,7 @@ val ignored = List(
 	"com.huawei.android.launcher","com.sec.android.app.launcher"
 )
 
-val df0 = spark.read.option("header","true").csv("hdfs://192.168.130.61/user/test/tmp/ap/a_2017")
+val df0 = spark.read.option("header","true").csv("hdfs://192.168.130.60/user/test/tmp/ap/a_2017")
 val df1 = df0.withColumn("package_name", trim($"package_name"))
 val df2 = df1.filter($"hour" === -1).filter(substring($"date",0,6) === month).filter(not($"package_name".isin(ignored:_*)))
 val df3 = df2.groupBy("package_name","name").agg(countDistinct("device_id"))

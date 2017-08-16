@@ -1,0 +1,33 @@
+val APP = "com.ss.android.article.news"
+
+//读取原始数据并做必要过滤
+val raw = spark.read.option("header","true").csv("hdfs://192.168.130.60/user/test/tmp/ap/a_2017")
+val df0 = raw.filter($"hour" === -1).filter(length($"date") === 8)
+
+//计算指定app每日活跃设备数和使用时长
+val df2 = df0.filter($"package_name" === APP)
+val df4 = df2.groupBy("date").agg(countDistinct("device_id").as("app_devices"), sum("uptime").as("app_uptime"))
+val df8 = df4.select($"date", $"app_devices", $"app_uptime")
+
+//计算每日总活跃设备数和总使用时长
+val df10 = df0.groupBy("date").agg(countDistinct("device_id").as("all_devices"), sum("uptime").as("all_uptime"))
+val df12 = df10.select($"date", $"all_devices", $"all_uptime")
+
+//根据date组合两份数据集
+val df20 = df8.join(df12, "date")
+
+//计算app占比
+val df30 = df20.withColumn("deviceRatio", $"app_devices"/$"all_devices" )
+val df32 = df30.withColumn("uptimeRatio", $"app_uptime"/$"all_uptime" )
+
+//调整输出格式
+val df34 = df32.orderBy("date")
+val df36 = df34.withColumn("date", concat(substring($"date",1,4), 
+	lit("-"), substring($"date",5,2), lit("-"), substring($"date",7,2)))
+val df38 = df36.withColumn("app_uptime", $"app_uptime"/1000)
+val df40 = df38.withColumn("all_uptime", $"all_uptime"/1000)
+val df42 = df40.withColumn("deviceRatio", format_number($"deviceRatio",6))
+val df44 = df42.withColumn("uptimeRatio", format_number($"uptimeRatio",6))
+
+df44.show(999)
+
