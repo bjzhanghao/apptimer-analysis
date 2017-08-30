@@ -23,7 +23,11 @@
 //val APP = "com.tencent.map"
 //val APP = "com.suning.mobile.ebuy"
 //val APP = "com.dangdang.buy2"
-val APP = "tv.danmaku.bili"
+//val APP = "tv.danmaku.bili"
+//val APP = "com.mt.mtxx.mtxx"
+//val APP = "com.meitu.meiyancamera" //美颜相机
+//val APP = "com.meitu.meipaimv"
+val APP = "com.meitu.wheecam" //潮自拍
 
 //读取原始数据并做必要过滤
 val raw = spark.read.option("header","true").csv("hdfs://192.168.130.60/user/test/tmp/ap/a_2017")
