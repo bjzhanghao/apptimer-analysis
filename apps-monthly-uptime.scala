@@ -1,5 +1,7 @@
 //import org.apache.spark.sql.functions._
 
+//将用apps-mat.scala取代
+
 //每月uptime最高的50个app
 val df0 = spark.read.option("header","true").csv("hdfs://192.168.130.61/user/test/tmp/ap/a_2017")
 val df1 = df0.filter($"hour" === -1).filter($"date".between("20170301","20170331"))
